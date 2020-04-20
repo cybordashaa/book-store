@@ -16,7 +16,7 @@ import { RoleModule } from './modules/role/role.module';
 export class AppModule {
   static port: number | string;
 
-  constructor(private readonly _configService: ConfigServise){
+  constructor(private readonly _configService: ConfigServise) {
 
     AppModule.port = this._configService.get(Configuration.PORT);
   }

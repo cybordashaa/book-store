@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinTable, ManyToMany } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinTable, ManyToMany, JoinColumn } from "typeorm";
 import { UserDetails } from "./user.details.entity";
 import { Role } from "../role/role.entity";
 import { type } from "os";
@@ -17,7 +17,7 @@ export class User extends BaseEntity {
     @Column({ type: 'varchar', nullable: false })
     password: string;
 
-    @JoinTable({ name: 'detail_id' })
+    @JoinColumn({ name: 'detail_id' })
     @OneToOne(type => UserDetails, { cascade: true, nullable: false, eager: true })
     details: UserDetails;
 
