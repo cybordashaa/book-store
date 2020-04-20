@@ -21,7 +21,7 @@ export class User extends BaseEntity {
     @OneToOne(type => UserDetails, { cascade: true, nullable: false, eager: true })
     details: UserDetails;
 
-    @ManyToMany(type => Role, role => role.user)
+    @ManyToMany(type => Role, role => role.user, { eager: true })
     @JoinTable({ name: 'user_roles' })
     roles: Role[]
 
