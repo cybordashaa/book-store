@@ -37,4 +37,4 @@ export class RoleController {
         await this._roleService.delete(id);
         return true;
     }
-}
+} 
