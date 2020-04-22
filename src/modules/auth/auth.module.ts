@@ -30,7 +30,7 @@ import { Configuration } from '../../config/config.keys';
     })
   ],
   controllers: [AuthController],
-  providers: [AuthService, ConfigServise],
+  providers: [AuthService, ConfigServise, JwtStrategy],
   exports: [JwtStrategy, PassportModule]
 })
 export class AuthModule { }
