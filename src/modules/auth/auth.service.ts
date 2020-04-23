@@ -2,11 +2,12 @@ import { Injectable, ConflictException, NotFoundException, UnauthorizedException
 import { AuthRepository } from './auth.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { SignupDto, SiginDto } from './dto';
+import { SignupDto, SiginDto, LoggedInDto } from './dto';
 import { User } from '../user/user.entity';
 import { compare } from 'bcryptjs';
 import { IJwtPayload } from './jwt.payload.interface';
 import { RoleType } from '../role/roletype';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +29,7 @@ export class AuthService {
         return this._authRepository.signup(signupDto);
     }
 
-    async signin(signinDto: SiginDto): Promise<{ token: string }> {
+    async signin(signinDto: SiginDto): Promise<LoggedInDto> {
         const { username, password } = signinDto;
 
         const user: User = await this._authRepository.findOne({
@@ -54,6 +55,6 @@ export class AuthService {
 
         const token = await this._jwtService.sign(payload);
 
-        return { token };
+        return plainToClass(LoggedInDto, { token, user });
     }
 }
